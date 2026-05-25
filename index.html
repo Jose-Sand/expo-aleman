@@ -603,8 +603,33 @@
   .film-row .film-img { flex: 1; min-width: 0; }
   .film-img--poster { object-position: top; }
 
+  /* DOG GALLERY – 3×2 grid */
+  .dog-gallery {
+    flex: 1.2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 6px;
+    padding: 14px 16px 14px 8px;
+    min-width: 0;
+  }
+  .dog-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    transition: transform .3s, box-shadow .3s;
+  }
+  .dog-img:hover {
+    transform: scale(1.04);
+    box-shadow: 0 6px 22px rgba(0,0,0,.3);
+    z-index: 1;
+    position: relative;
+  }
+
   @media (max-width: 700px) {
-    .film-gallery { display: none; }
+    .film-gallery, .dog-gallery { display: none; }
   }
 
   /* SCROLLBAR */
@@ -957,10 +982,11 @@
     </div>
 
     <!-- ═══ SLIDE 4: LIEBLINGSTIER ═══ -->
-    <div class="slide content-slide" id="slide-4">
+    <div class="slide content-slide" id="slide-4" style="flex-direction:row;">
       <div class="copper-bar"></div>
-      <div class="slide-inner">
-        <div class="slide-emoji-bg">🐕</div>
+
+      <!-- LEFT: text + vocab -->
+      <div class="slide-inner" style="flex:0.85; min-width:0;">
         <div class="slide-counter">04 / 05</div>
         <div class="slide-category">Lieblingstier</div>
         <div class="topic-badge"><span class="emoji">🐕</span> der Hund</div>
@@ -969,18 +995,15 @@
         <div class="slide-translation">"Mi animal favorito es el perro. Los perros son leales y amigables. Me gustan mucho."</div>
 
         <div class="vocab-label">Vokabeln – klick zum Umdrehen</div>
-        <div class="vocab-grid">
+        <div class="vocab-grid" style="grid-template-columns:repeat(2,1fr);">
           <div class="flip-card" onclick="this.classList.toggle('flipped')">
             <div class="flip-inner">
               <div class="flip-front">
                 <div class="flip-de">Tier</div>
                 <div class="flip-article">das Tier</div>
-                <div class="flip-phonetic" data-pron="tír" onclick="showPron(event,'tír')">[tír]</div>
+                <div class="flip-phonetic" onclick="showPron(event,'tír')">[tír]</div>
               </div>
-              <div class="flip-back">
-                <div class="flip-es">animal</div>
-                <div class="flip-hint">clic para volver</div>
-              </div>
+              <div class="flip-back"><div class="flip-es">animal</div><div class="flip-hint">clic para volver</div></div>
             </div>
           </div>
           <div class="flip-card" onclick="this.classList.toggle('flipped')">
@@ -988,12 +1011,9 @@
               <div class="flip-front">
                 <div class="flip-de">treu</div>
                 <div class="flip-article">adj.</div>
-                <div class="flip-phonetic" data-pron="troy" onclick="showPron(event,'troy')">[troy]</div>
+                <div class="flip-phonetic" onclick="showPron(event,'troy')">[troy]</div>
               </div>
-              <div class="flip-back">
-                <div class="flip-es">leal</div>
-                <div class="flip-hint">clic para volver</div>
-              </div>
+              <div class="flip-back"><div class="flip-es">leal</div><div class="flip-hint">clic para volver</div></div>
             </div>
           </div>
           <div class="flip-card" onclick="this.classList.toggle('flipped')">
@@ -1001,12 +1021,9 @@
               <div class="flip-front">
                 <div class="flip-de">freundlich</div>
                 <div class="flip-article">adj.</div>
-                <div class="flip-phonetic" data-pron="fróindlij" onclick="showPron(event,'fróindlij')">[fróindlij]</div>
+                <div class="flip-phonetic" onclick="showPron(event,'fróindlij')">[fróindlij]</div>
               </div>
-              <div class="flip-back">
-                <div class="flip-es">amigable</div>
-                <div class="flip-hint">clic para volver</div>
-              </div>
+              <div class="flip-back"><div class="flip-es">amigable</div><div class="flip-hint">clic para volver</div></div>
             </div>
           </div>
           <div class="flip-card" onclick="this.classList.toggle('flipped')">
@@ -1014,15 +1031,22 @@
               <div class="flip-front">
                 <div class="flip-de">Ich mag…</div>
                 <div class="flip-article">frase</div>
-                <div class="flip-phonetic" data-pron="ij mak" onclick="showPron(event,'ij mak')">[ij mak]</div>
+                <div class="flip-phonetic" onclick="showPron(event,'ij mak')">[ij mak]</div>
               </div>
-              <div class="flip-back">
-                <div class="flip-es">me gusta/gustan</div>
-                <div class="flip-hint">clic para volver</div>
-              </div>
+              <div class="flip-back"><div class="flip-es">me gusta/gustan</div><div class="flip-hint">clic para volver</div></div>
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- RIGHT: 6-image grid 3x2 -->
+      <div class="dog-gallery">
+        <img class="dog-img" src="perro1.jpeg" alt="Perro 1" loading="lazy">
+        <img class="dog-img" src="perro2.jpeg" alt="Perro 2" loading="lazy">
+        <img class="dog-img" src="perro3.jpeg" alt="Perro 3" loading="lazy">
+        <img class="dog-img" src="perro4.jpeg" alt="Perro 4" loading="lazy">
+        <img class="dog-img" src="perro5.jpeg" alt="Perro 5" loading="lazy">
+        <img class="dog-img" src="perro6.jpeg" alt="Perro 6" loading="lazy">
       </div>
     </div>
 
