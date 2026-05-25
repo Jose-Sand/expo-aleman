@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meine Lieblinge – José · Deutsch A1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ivory:   #FAF7F2;
+    --slate:   #1C2B3A;
+    --copper:  #B5714A;
+    --charcoal:#3D3530;
+    --copper-light: #D4956E;
+    --copper-dim:   #8A5537;
+    --ivory-dark:   #F0EBE3;
+    --slate-light:  #2E4156;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    background: var(--slate);
+    font-family: 'Inter', sans-serif;
+    color: var(--charcoal);
+    overflow: hidden;
+    user-select: none;
+  }
+
+  /* ── PRESENTATION WRAPPER ── */
+  #app {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── SLIDES CONTAINER ── */
+  #slides {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(60px);
+    transition: opacity .55s cubic-bezier(.4,0,.2,1),
+                transform .55s cubic-bezier(.4,0,.2,1);
+  }
+  .slide.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
+  }
+  .slide.exit {
+    opacity: 0;
+    transform: translateX(-60px);
+    pointer-events: none;
+  }
+
+  /* ── TRANSLATION TOGGLE ── */
+  #toggle-bar {
+    position: fixed;
+    top: 18px;
+    right: 22px;
+    z-index: 100;
+  }
+  #trans-toggle {
+    background: rgba(28,43,58,.75);
+    border: 1.5px solid var(--copper);
+    color: var(--copper-light);
+    font-family: 'Inter', sans-serif;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: background .2s, color .2s;
+  }
+  #trans-toggle:hover { background: var(--copper); color: #fff; }
+
+  /* ── BOTTOM PROGRESS BAR ── */
+  #progress-wrap {
+    background: var(--slate);
+    padding: 14px 32px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid rgba(181,113,74,.25);
+  }
+  #dots {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+    justify-content: center;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(181,113,74,.3);
+    cursor: pointer;
+    transition: background .3s, transform .3s, width .3s;
+    border-radius: 4px;
+  }
+  .dot.active {
+    background: var(--copper);
+    width: 28px;
+  }
+  .dot:hover { background: var(--copper-light); }
+
+  #nav-prev, #nav-next {
+    background: none;
+    border: 1.5px solid rgba(181,113,74,.5);
+    color: var(--copper-light);
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color .2s, background .2s;
+    flex-shrink: 0;
+  }
+  #nav-prev:hover, #nav-next:hover {
+    background: var(--copper);
+    border-color: var(--copper);
+    color: #fff;
+  }
+
+  /* ══════════════════════════════════════
+     SLIDE 0 – PORTADA
+  ══════════════════════════════════════ */
+  #slide-0 {
+    background: var(--ivory);
+    flex-direction: row;
+  }
+  .cover-left {
+    flex: 1.1;
+    background: var(--slate);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 64px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-left::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(181,113,74,.12);
+  }
+  .cover-left::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(181,113,74,.08);
+  }
+  .cover-eyebrow {
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 20px;
+  }
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.2rem, 7vw, 5.5rem);
+    font-weight: 900;
+    color: var(--ivory);
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+  .cover-subtitle {
+    font-size: .95rem;
+    color: rgba(250,247,242,.55);
+    letter-spacing: .04em;
+  }
+  .cover-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 64px 52px;
+    gap: 16px;
+    position: relative;
+  }
+  .cover-right::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 10%; bottom: 10%;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--copper), transparent);
+  }
+  .cover-topic {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    border-radius: 10px;
+    background: var(--ivory-dark);
+    border-left: 3px solid var(--copper);
+    transition: transform .2s, box-shadow .2s;
+    cursor: default;
+  }
+  .cover-topic:hover {
+    transform: translateX(6px);
+    box-shadow: 0 4px 20px rgba(181,113,74,.15);
+  }
+  .cover-topic .emoji { font-size: 1.5rem; }
+  .cover-topic-text { display: flex; flex-direction: column; }
+  .cover-topic-de {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--slate);
+  }
+  .cover-topic-es {
+    font-size: .75rem;
+    color: var(--copper);
+    font-weight: 500;
+  }
+
+  /* ══════════════════════════════════════
+     CONTENT SLIDES (1-5)
+  ══════════════════════════════════════ */
+  .content-slide {
+    background: var(--ivory);
+    flex-direction: row;
+  }
+  .copper-bar {
+    width: 6px;
+    background: linear-gradient(to bottom, var(--copper-light), var(--copper-dim));
+    flex-shrink: 0;
+  }
+  .slide-inner {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 42px 52px 32px 48px;
+    overflow-y: auto;
+    position: relative;
+  }
+  .slide-counter {
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .15em;
+    color: var(--copper);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .slide-category {
+    font-size: .8rem;
+    font-weight: 500;
+    color: rgba(61,53,48,.45);
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    margin-bottom: 14px;
+  }
+  .slide-main-phrase {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+    font-weight: 700;
+    color: var(--slate);
+    line-height: 1.25;
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--copper);
+    padding-bottom: 14px;
+    max-width: 680px;
+  }
+  .slide-desc {
+    font-size: 1.05rem;
+    color: var(--charcoal);
+    margin-bottom: 6px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .slide-translation {
+    font-size: .875rem;
+    color: rgba(61,53,48,.5);
+    font-style: italic;
+    margin-bottom: 22px;
+    transition: opacity .3s;
+  }
+  .slide-translation.hidden { opacity: 0; pointer-events: none; }
+
+  /* TIP BOX */
+  .tip-box {
+    background: rgba(181,113,74,.1);
+    border-left: 3px solid var(--copper);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 16px;
+    margin-bottom: 18px;
+    font-size: .82rem;
+    color: var(--copper-dim);
+    font-style: italic;
+  }
+  .tip-box strong { font-style: normal; color: var(--copper); }
+
+  /* VOCAB GRID */
+  .vocab-label {
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(61,53,48,.4);
+    margin-bottom: 12px;
+  }
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+  }
+
+  /* FLIP CARD */
+  .flip-card {
+    height: 90px;
+    perspective: 800px;
+    cursor: pointer;
+  }
+  .flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform .45s cubic-bezier(.4,0,.2,1);
+  }
+  .flip-card:hover .flip-inner,
+  .flip-card.flipped .flip-inner {
+    transform: rotateY(180deg);
+  }
+  .flip-front, .flip-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+  }
+  .flip-front {
+    background: var(--slate);
+    border: 1.5px solid rgba(181,113,74,.3);
+  }
+  .flip-back {
+    background: var(--copper);
+    transform: rotateY(180deg);
+  }
+  .flip-de {
+    font-family: 'Playfair Display', serif;
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--ivory);
+    margin-bottom: 2px;
+  }
+  .flip-article {
+    font-size: .68rem;
+    color: var(--copper);
+    font-weight: 500;
+    letter-spacing: .06em;
+  }
+  .flip-phonetic {
+    font-size: .62rem;
+    color: rgba(250,247,242,.45);
+    font-style: italic;
+    margin-top: 3px;
+    cursor: pointer;
+  }
+  .flip-back .flip-es {
+    font-size: .88rem;
+    font-weight: 600;
+    color: #fff;
+  }
+  .flip-hint {
+    font-size: .58rem;
+    color: rgba(255,255,255,.6);
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+
+  /* TOPIC BADGE */
+  .topic-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--slate);
+    color: var(--ivory);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 24px;
+    margin-bottom: 16px;
+    border: 1.5px solid rgba(181,113,74,.4);
+  }
+  .topic-badge .emoji { font-size: 1.3rem; }
+
+  /* SLIDE VISUAL ACCENT */
+  .slide-emoji-bg {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: clamp(7rem, 14vw, 11rem);
+    opacity: .06;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  /* ══════════════════════════════════════
+     SLIDE 6 – CIERRE
+  ══════════════════════════════════════ */
+  #slide-6 {
+    background: var(--slate);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  #slide-6::before {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    background: radial-gradient(ellipse at 30% 40%, rgba(181,113,74,.18) 0%, transparent 60%),
+                radial-gradient(ellipse at 75% 70%, rgba(181,113,74,.10) 0%, transparent 50%);
+  }
+  .closing-eyebrow {
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 18px;
+    position: relative;
+  }
+  .closing-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    font-weight: 900;
+    color: var(--ivory);
+    line-height: 1.1;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .closing-sub {
+    font-size: 1rem;
+    color: rgba(250,247,242,.5);
+    margin-bottom: 48px;
+    position: relative;
+  }
+  .summary-grid {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .summary-card {
+    background: rgba(250,247,242,.07);
+    border: 1.5px solid rgba(181,113,74,.35);
+    border-radius: 14px;
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 120px;
+    transition: transform .25s, background .25s;
+  }
+  .summary-card:hover {
+    transform: translateY(-4px);
+    background: rgba(181,113,74,.15);
+  }
+  .summary-card .s-emoji { font-size: 2rem; }
+  .summary-card .s-de {
+    font-family: 'Playfair Display', serif;
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--ivory);
+    text-align: center;
+  }
+  .summary-card .s-item {
+    font-size: .72rem;
+    color: var(--copper-light);
+    font-weight: 500;
+  }
+  .closing-thanks {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--copper-light);
+    position: relative;
+  }
+
+  /* ── PHONETIC TOOLTIP ── */
+  .pron-tooltip {
+    position: fixed;
+    background: var(--slate);
+    border: 1.5px solid var(--copper);
+    color: var(--ivory);
+    font-family: 'Inter', sans-serif;
+    font-size: .78rem;
+    padding: 6px 12px;
+    border-radius: 8px;
+    pointer-events: none;
+    z-index: 200;
+    opacity: 0;
+    transition: opacity .2s;
+    white-space: nowrap;
+  }
+  .pron-tooltip.show { opacity: 1; }
+  .pron-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%; left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--copper);
+  }
+
+  /* SCROLLBAR */
+  .slide-inner::-webkit-scrollbar { width: 4px; }
+  .slide-inner::-webkit-scrollbar-track { background: transparent; }
+  .slide-inner::-webkit-scrollbar-thumb { background: var(--copper-dim); border-radius: 2px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    #slide-0 { flex-direction: column; }
+    .cover-left { flex: none; padding: 40px 28px 32px; }
+    .cover-right { flex: none; padding: 28px; }
+    .cover-right::before { display: none; }
+    .slide-inner { padding: 28px 24px 24px; }
+    .vocab-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- TRANSLATION TOGGLE -->
+<div id="toggle-bar">
+  <button id="trans-toggle" title="Mostrar/ocultar traducciones">🌐 Solo Alemán</button>
+</div>
+
+<!-- PHONETIC TOOLTIP -->
+<div class="pron-tooltip" id="tooltip"></div>
+
+<!-- APP -->
+<div id="app">
+  <div id="slides">
+
+    <!-- ═══ SLIDE 0: PORTADA ═══ -->
+    <div class="slide active" id="slide-0">
+      <div class="cover-left">
+        <div class="cover-eyebrow">Exposición · Deutsch A1</div>
+        <div class="cover-title">Meine<br>Lieblinge</div>
+        <div class="cover-subtitle">von José &nbsp;·&nbsp; 2026</div>
+      </div>
+      <div class="cover-right">
+        <div class="cover-topic">
+          <span class="emoji">🎬</span>
+          <div class="cover-topic-text">
+            <span class="cover-topic-de">Lieblingsfilm</span>
+            <span class="cover-topic-es">Película favorita</span>
+          </div>
+        </div>
+        <div class="cover-topic">
+          <span class="emoji">🍟</span>
+          <div class="cover-topic-text">
+            <span class="cover-topic-de">Lieblingsessen</span>
+            <span class="cover-topic-es">Comida favorita</span>
+          </div>
+        </div>
+        <div class="cover-topic">
+          <span class="emoji">🏐</span>
+          <div class="cover-topic-text">
+            <span class="cover-topic-de">Lieblingssport</span>
+            <span class="cover-topic-es">Deporte favorito</span>
+          </div>
+        </div>
+        <div class="cover-topic">
+          <span class="emoji">🐕</span>
+          <div class="cover-topic-text">
+            <span class="cover-topic-de">Lieblingstier</span>
+            <span class="cover-topic-es">Animal favorito</span>
+          </div>
+        </div>
+        <div class="cover-topic">
+          <span class="emoji">🖤</span>
+          <div class="cover-topic-text">
+            <span class="cover-topic-de">Lieblingsfarbe</span>
+            <span class="cover-topic-es">Color favorito</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SLIDE 1: LIEBLINGSFILM ═══ -->
+    <div class="slide content-slide" id="slide-1">
+      <div class="copper-bar"></div>
+      <div class="slide-inner">
+        <div class="slide-emoji-bg">🎬</div>
+        <div class="slide-counter">01 / 05</div>
+        <div class="slide-category">Lieblingsfilm</div>
+        <div class="topic-badge"><span class="emoji">🎬</span> Interstellar</div>
+        <div class="slide-main-phrase">Mein Lieblingsfilm ist Interstellar.</div>
+        <div class="slide-desc">Der Film ist sehr spannend und interessant.</div>
+        <div class="slide-translation">"Mi película favorita es Interstellar. La película es muy emocionante e interesante."</div>
+
+        <div class="vocab-label">Vokabeln – klick zum Umdrehen</div>
+        <div class="vocab-grid">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">Film</div>
+                <div class="flip-article">der Film</div>
+                <div class="flip-phonetic" data-pron="film" onclick="showPron(event,'film')">[film]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">película</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">spannend</div>
+                <div class="flip-article">adj.</div>
+                <div class="flip-phonetic" data-pron="shpánent" onclick="showPron(event,'shpánent')">[shpánent]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">emocionante</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">interessant</div>
+                <div class="flip-article">adj.</div>
+                <div class="flip-phonetic" data-pron="interesánt" onclick="showPron(event,'interesánt')">[interesánt]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">interesante</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">sehr</div>
+                <div class="flip-article">adv.</div>
+                <div class="flip-phonetic" data-pron="ser" onclick="showPron(event,'ser')">[ser]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">muy</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SLIDE 2: LIEBLINGSESSEN ═══ -->
+    <div class="slide content-slide" id="slide-2">
+      <div class="copper-bar"></div>
+      <div class="slide-inner">
+        <div class="slide-emoji-bg">🍟</div>
+        <div class="slide-counter">02 / 05</div>
+        <div class="slide-category">Lieblingsessen</div>
+        <div class="topic-badge"><span class="emoji">🍟</span> Salchipapa</div>
+        <div class="slide-main-phrase">Mein Lieblingsessen ist Salchipapa.</div>
+        <div class="slide-desc">Das ist ein kolumbianisches Gericht. Es ist sehr lecker!</div>
+        <div class="slide-translation">"Mi comida favorita es la salchipapa. Es un plato colombiano. ¡Es muy delicioso!"</div>
+
+        <div class="tip-box">
+          <strong>💡 Tipp:</strong> Si preguntan qué es — <em>"Das ist Pommes mit Würstchen."</em>
+        </div>
+
+        <div class="vocab-label">Vokabeln – klick zum Umdrehen</div>
+        <div class="vocab-grid">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">Essen</div>
+                <div class="flip-article">das Essen</div>
+                <div class="flip-phonetic" data-pron="ésen" onclick="showPron(event,'ésen')">[ésen]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">comida</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">lecker</div>
+                <div class="flip-article">adj.</div>
+                <div class="flip-phonetic" data-pron="léker" onclick="showPron(event,'léker')">[léker]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">delicioso</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">Gericht</div>
+                <div class="flip-article">das Gericht</div>
+                <div class="flip-phonetic" data-pron="gueríjt" onclick="showPron(event,'gueríjt')">[gueríjt]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">el plato</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">kolumbianisch</div>
+                <div class="flip-article">adj.</div>
+                <div class="flip-phonetic" data-pron="kolumbiánish" onclick="showPron(event,'kolumbiánish')">[kolumbiánish]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">colombiano</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SLIDE 3: LIEBLINGSSPORT ═══ -->
+    <div class="slide content-slide" id="slide-3">
+      <div class="copper-bar"></div>
+      <div class="slide-inner">
+        <div class="slide-emoji-bg">🏐</div>
+        <div class="slide-counter">03 / 05</div>
+        <div class="slide-category">Lieblingssport</div>
+        <div class="topic-badge"><span class="emoji">🏐</span> Volleyball</div>
+        <div class="slide-main-phrase">Mein Lieblingssport ist Volleyball.</div>
+        <div class="slide-desc">Ich spiele gern Volleyball. Es macht Spaß!</div>
+        <div class="slide-translation">"Mi deporte favorito es el voleibol. Me gusta jugar voleibol. ¡Es divertido!"</div>
+
+        <div class="vocab-label">Vokabeln – klick zum Umdrehen</div>
+        <div class="vocab-grid">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">Sport</div>
+                <div class="flip-article">der Sport</div>
+                <div class="flip-phonetic" data-pron="shport" onclick="showPron(event,'shport')">[shport]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">deporte</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">spielen</div>
+                <div class="flip-article">verbo</div>
+                <div class="flip-phonetic" data-pron="shpílen" onclick="showPron(event,'shpílen')">[shpílen]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">jugar</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">Ich spiele gern</div>
+                <div class="flip-article">frase</div>
+                <div class="flip-phonetic" data-pron="ij shpíle guern" onclick="showPron(event,'ij shpíle guern')">[ij shpíle guern]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">me gusta jugar</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">Es macht Spaß</div>
+                <div class="flip-article">frase</div>
+                <div class="flip-phonetic" data-pron="es maxt shpas" onclick="showPron(event,'es maxt shpas')">[es maxt shpas]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">es divertido</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SLIDE 4: LIEBLINGSTIER ═══ -->
+    <div class="slide content-slide" id="slide-4">
+      <div class="copper-bar"></div>
+      <div class="slide-inner">
+        <div class="slide-emoji-bg">🐕</div>
+        <div class="slide-counter">04 / 05</div>
+        <div class="slide-category">Lieblingstier</div>
+        <div class="topic-badge"><span class="emoji">🐕</span> der Hund</div>
+        <div class="slide-main-phrase">Mein Lieblingstier ist der Hund.</div>
+        <div class="slide-desc">Hunde sind treu und freundlich. Ich mag Hunde sehr.</div>
+        <div class="slide-translation">"Mi animal favorito es el perro. Los perros son leales y amigables. Me gustan mucho."</div>
+
+        <div class="vocab-label">Vokabeln – klick zum Umdrehen</div>
+        <div class="vocab-grid">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">Tier</div>
+                <div class="flip-article">das Tier</div>
+                <div class="flip-phonetic" data-pron="tír" onclick="showPron(event,'tír')">[tír]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">animal</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">treu</div>
+                <div class="flip-article">adj.</div>
+                <div class="flip-phonetic" data-pron="troy" onclick="showPron(event,'troy')">[troy]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">leal</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">freundlich</div>
+                <div class="flip-article">adj.</div>
+                <div class="flip-phonetic" data-pron="fróindlij" onclick="showPron(event,'fróindlij')">[fróindlij]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">amigable</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">Ich mag…</div>
+                <div class="flip-article">frase</div>
+                <div class="flip-phonetic" data-pron="ij mak" onclick="showPron(event,'ij mak')">[ij mak]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">me gusta/gustan</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SLIDE 5: LIEBLINGSFARBE ═══ -->
+    <div class="slide content-slide" id="slide-5">
+      <div class="copper-bar"></div>
+      <div class="slide-inner">
+        <div class="slide-emoji-bg">🖤</div>
+        <div class="slide-counter">05 / 05</div>
+        <div class="slide-category">Lieblingsfarbe</div>
+        <div class="topic-badge"><span class="emoji">🖤</span> Schwarz</div>
+        <div class="slide-main-phrase">Meine Lieblingsfarbe ist Schwarz.</div>
+        <div class="slide-desc">Schwarz ist elegant und modern. Ich finde Schwarz sehr schön.</div>
+        <div class="slide-translation">"Mi color favorito es el negro. El negro es elegante y moderno. Encuentro el negro muy bonito."</div>
+
+        <div class="vocab-label">Vokabeln – klick zum Umdrehen</div>
+        <div class="vocab-grid">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">Farbe</div>
+                <div class="flip-article">die Farbe</div>
+                <div class="flip-phonetic" data-pron="fárbe" onclick="showPron(event,'fárbe')">[fárbe]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">color</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">schwarz</div>
+                <div class="flip-article">adj.</div>
+                <div class="flip-phonetic" data-pron="shvarts" onclick="showPron(event,'shvarts')">[shvarts]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">negro</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">elegant</div>
+                <div class="flip-article">adj.</div>
+                <div class="flip-phonetic" data-pron="elegánt" onclick="showPron(event,'elegánt')">[elegánt]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">elegante</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-de">Ich finde…schön</div>
+                <div class="flip-article">frase</div>
+                <div class="flip-phonetic" data-pron="ij fínde…shön" onclick="showPron(event,'ij fínde…shön')">[ij fínde…shön]</div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-es">encuentro…bonito</div>
+                <div class="flip-hint">clic para volver</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SLIDE 6: CIERRE ═══ -->
+    <div class="slide" id="slide-6">
+      <div class="closing-eyebrow">Zusammenfassung</div>
+      <div class="closing-title">Das sind meine<br>Lieblinge!</div>
+      <div class="closing-sub">von José &nbsp;·&nbsp; Deutsch A1</div>
+      <div class="summary-grid">
+        <div class="summary-card">
+          <span class="s-emoji">🎬</span>
+          <span class="s-de">Lieblingsfilm</span>
+          <span class="s-item">Interstellar</span>
+        </div>
+        <div class="summary-card">
+          <span class="s-emoji">🍟</span>
+          <span class="s-de">Lieblingsessen</span>
+          <span class="s-item">Salchipapa</span>
+        </div>
+        <div class="summary-card">
+          <span class="s-emoji">🏐</span>
+          <span class="s-de">Lieblingssport</span>
+          <span class="s-item">Volleyball</span>
+        </div>
+        <div class="summary-card">
+          <span class="s-emoji">🐕</span>
+          <span class="s-de">Lieblingstier</span>
+          <span class="s-item">der Hund</span>
+        </div>
+        <div class="summary-card">
+          <span class="s-emoji">🖤</span>
+          <span class="s-de">Lieblingsfarbe</span>
+          <span class="s-item">Schwarz</span>
+        </div>
+      </div>
+      <div class="closing-thanks">Vielen Dank! &nbsp;·&nbsp; Habt ihr Fragen?</div>
+    </div>
+
+  </div><!-- /slides -->
+
+  <!-- PROGRESS BAR -->
+  <div id="progress-wrap">
+    <button id="nav-prev" aria-label="Anterior">&#8592;</button>
+    <div id="dots"></div>
+    <button id="nav-next" aria-label="Siguiente">&#8594;</button>
+  </div>
+</div><!-- /app -->
+
+<script>
+  /* ─── STATE ─── */
+  const TOTAL = 7;
+  let current = 0;
+  let showTrans = true;
+  let animating = false;
+
+  /* ─── DOM REFS ─── */
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const dotsWrap = document.getElementById('dots');
+  const tooltip = document.getElementById('tooltip');
+  const transBtn = document.getElementById('trans-toggle');
+
+  /* ─── BUILD DOTS ─── */
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Slide ' + (i + 1));
+    d.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(d);
+  });
+
+  function getDots() { return Array.from(dotsWrap.querySelectorAll('.dot')); }
+
+  /* ─── NAVIGATION ─── */
+  function goTo(idx) {
+    if (animating || idx === current || idx < 0 || idx >= TOTAL) return;
+    animating = true;
+
+    const prev = slides[current];
+    const next = slides[idx];
+    const dir  = idx > current ? 1 : -1;
+
+    prev.classList.remove('active');
+    prev.classList.add('exit');
+    if (dir < 0) prev.style.transform = 'translateX(60px)';
+    else prev.style.transform = '';
+
+    next.style.transform = dir > 0 ? 'translateX(60px)' : 'translateX(-60px)';
+    next.classList.add('active');
+
+    setTimeout(() => {
+      prev.classList.remove('exit');
+      prev.style.transform = '';
+      next.style.transform = '';
+      animating = false;
+    }, 560);
+
+    current = idx;
+    getDots().forEach((d, i) => d.classList.toggle('active', i === idx));
+    applyTransState();
+  }
+
+  document.getElementById('nav-prev').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('nav-next').addEventListener('click', () => goTo(current + 1));
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(current - 1);
+  });
+
+  /* ─── SWIPE ─── */
+  let touchX = null;
+  document.addEventListener('touchstart', e => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', e => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
+    touchX = null;
+  }, { passive: true });
+
+  /* ─── TRANSLATION TOGGLE ─── */
+  function applyTransState() {
+    document.querySelectorAll('.slide-translation').forEach(el => {
+      el.classList.toggle('hidden', !showTrans);
+    });
+  }
+
+  transBtn.addEventListener('click', () => {
+    showTrans = !showTrans;
+    transBtn.textContent = showTrans ? '🌐 Solo Alemán' : '🌐 + Español';
+    applyTransState();
+  });
+
+  /* ─── PHONETIC TOOLTIP ─── */
+  let tooltipTimer;
+  window.showPron = function(e, pron) {
+    e.stopPropagation();
+    clearTimeout(tooltipTimer);
+    const rect = e.target.getBoundingClientRect();
+    tooltip.textContent = '🔊 ' + pron;
+    tooltip.style.left = (rect.left + rect.width / 2 - tooltip.offsetWidth / 2) + 'px';
+    tooltip.style.top  = (rect.top - 40) + 'px';
+    tooltip.classList.add('show');
+    tooltipTimer = setTimeout(() => tooltip.classList.remove('show'), 2200);
+  };
+
+  document.addEventListener('click', () => tooltip.classList.remove('show'));
+</script>
+</body>
+</html>
