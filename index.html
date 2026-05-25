@@ -542,6 +542,32 @@
     border-top-color: var(--copper);
   }
 
+  /* INTRO ROWS */
+  .intro-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: var(--ivory-dark);
+    border-left: 3px solid var(--copper);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 18px;
+  }
+  .intro-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 1px; }
+  .intro-de {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--slate);
+    margin-bottom: 2px;
+  }
+  .intro-es {
+    font-size: .82rem;
+    color: rgba(61,53,48,.5);
+    font-style: italic;
+    transition: opacity .3s;
+  }
+  .intro-es.hidden { opacity: 0; }
+
   /* SCROLLBAR */
   .slide-inner::-webkit-scrollbar { width: 4px; }
   .slide-inner::-webkit-scrollbar-track { background: transparent; }
@@ -572,8 +598,59 @@
 <div id="app">
   <div id="slides">
 
-    <!-- ═══ SLIDE 0: PORTADA ═══ -->
+    <!-- ═══ SLIDE 0: PRESENTACIÓN PERSONAL ═══ -->
     <div class="slide active" id="slide-0">
+      <div class="copper-bar"></div>
+      <div class="slide-inner" style="justify-content:center; gap:0;">
+        <div class="slide-emoji-bg">🇨🇴</div>
+        <div style="margin-bottom:10px;">
+          <span style="font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--copper);">Vorstellung · Presentación</span>
+        </div>
+        <div style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;color:var(--slate);line-height:1.1;margin-bottom:28px;border-bottom:2px solid var(--copper);padding-bottom:18px;">
+          Hallo! Ich bin José.
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;max-width:560px;">
+          <div class="intro-row">
+            <span class="intro-icon">🙋</span>
+            <div>
+              <div class="intro-de">Ich heiße José.</div>
+              <div class="intro-es slide-translation">Me llamo José.</div>
+            </div>
+          </div>
+          <div class="intro-row">
+            <span class="intro-icon">🎂</span>
+            <div>
+              <div class="intro-de">Ich bin 27 Jahre alt.</div>
+              <div class="intro-es slide-translation">Tengo 27 años.</div>
+            </div>
+          </div>
+          <div class="intro-row">
+            <span class="intro-icon">🌎</span>
+            <div>
+              <div class="intro-de">Ich komme aus Kolumbien.</div>
+              <div class="intro-es slide-translation">Soy de Colombia.</div>
+            </div>
+          </div>
+          <div class="intro-row">
+            <span class="intro-icon">🏘️</span>
+            <div>
+              <div class="intro-de">Ich wohne in Sabaneta.</div>
+              <div class="intro-es slide-translation">Vivo en Sabaneta.</div>
+            </div>
+          </div>
+          <div class="intro-row">
+            <span class="intro-icon">📍</span>
+            <div>
+              <div class="intro-de">Ich bin in Barranquilla geboren.</div>
+              <div class="intro-es slide-translation">Nací en Barranquilla.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SLIDE 1: PORTADA ═══ -->
+    <div class="slide" id="slide-1-cover">
       <div class="cover-left">
         <div class="cover-eyebrow">Exposición · Deutsch A1</div>
         <div class="cover-title">Meine<br>Lieblinge</div>
@@ -1019,7 +1096,7 @@
 
 <script>
   /* ─── STATE ─── */
-  const TOTAL = 7;
+  const TOTAL = 8;
   let current = 0;
   let showTrans = true;
   let animating = false;
@@ -1090,7 +1167,7 @@
 
   /* ─── TRANSLATION TOGGLE ─── */
   function applyTransState() {
-    document.querySelectorAll('.slide-translation').forEach(el => {
+    document.querySelectorAll('.slide-translation, .intro-es').forEach(el => {
       el.classList.toggle('hidden', !showTrans);
     });
   }
