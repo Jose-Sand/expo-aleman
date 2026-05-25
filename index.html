@@ -883,10 +883,11 @@
     </div>
 
     <!-- ═══ SLIDE 3: LIEBLINGSSPORT ═══ -->
-    <div class="slide content-slide" id="slide-3">
+    <div class="slide content-slide" id="slide-3" style="flex-direction:row;">
       <div class="copper-bar"></div>
-      <div class="slide-inner">
-        <div class="slide-emoji-bg">🏐</div>
+
+      <!-- LEFT: text + vocab -->
+      <div class="slide-inner" style="flex:1.1; min-width:0;">
         <div class="slide-counter">03 / 05</div>
         <div class="slide-category">Lieblingssport</div>
         <div class="topic-badge"><span class="emoji">🏐</span> Volleyball</div>
@@ -895,18 +896,15 @@
         <div class="slide-translation">"Mi deporte favorito es el voleibol. Me gusta jugar voleibol. ¡Es divertido!"</div>
 
         <div class="vocab-label">Vokabeln – klick zum Umdrehen</div>
-        <div class="vocab-grid">
+        <div class="vocab-grid" style="grid-template-columns:repeat(2,1fr);">
           <div class="flip-card" onclick="this.classList.toggle('flipped')">
             <div class="flip-inner">
               <div class="flip-front">
                 <div class="flip-de">Sport</div>
                 <div class="flip-article">der Sport</div>
-                <div class="flip-phonetic" data-pron="shport" onclick="showPron(event,'shport')">[shport]</div>
+                <div class="flip-phonetic" onclick="showPron(event,'shport')">[shport]</div>
               </div>
-              <div class="flip-back">
-                <div class="flip-es">deporte</div>
-                <div class="flip-hint">clic para volver</div>
-              </div>
+              <div class="flip-back"><div class="flip-es">deporte</div><div class="flip-hint">clic para volver</div></div>
             </div>
           </div>
           <div class="flip-card" onclick="this.classList.toggle('flipped')">
@@ -914,12 +912,9 @@
               <div class="flip-front">
                 <div class="flip-de">spielen</div>
                 <div class="flip-article">verbo</div>
-                <div class="flip-phonetic" data-pron="shpílen" onclick="showPron(event,'shpílen')">[shpílen]</div>
+                <div class="flip-phonetic" onclick="showPron(event,'shpílen')">[shpílen]</div>
               </div>
-              <div class="flip-back">
-                <div class="flip-es">jugar</div>
-                <div class="flip-hint">clic para volver</div>
-              </div>
+              <div class="flip-back"><div class="flip-es">jugar</div><div class="flip-hint">clic para volver</div></div>
             </div>
           </div>
           <div class="flip-card" onclick="this.classList.toggle('flipped')">
@@ -927,12 +922,9 @@
               <div class="flip-front">
                 <div class="flip-de">Ich spiele gern</div>
                 <div class="flip-article">frase</div>
-                <div class="flip-phonetic" data-pron="ij shpíle guern" onclick="showPron(event,'ij shpíle guern')">[ij shpíle guern]</div>
+                <div class="flip-phonetic" onclick="showPron(event,'ij shpíle guern')">[ij shpíle guern]</div>
               </div>
-              <div class="flip-back">
-                <div class="flip-es">me gusta jugar</div>
-                <div class="flip-hint">clic para volver</div>
-              </div>
+              <div class="flip-back"><div class="flip-es">me gusta jugar</div><div class="flip-hint">clic para volver</div></div>
             </div>
           </div>
           <div class="flip-card" onclick="this.classList.toggle('flipped')">
@@ -940,14 +932,26 @@
               <div class="flip-front">
                 <div class="flip-de">Es macht Spaß</div>
                 <div class="flip-article">frase</div>
-                <div class="flip-phonetic" data-pron="es maxt shpas" onclick="showPron(event,'es maxt shpas')">[es maxt shpas]</div>
+                <div class="flip-phonetic" onclick="showPron(event,'es maxt shpas')">[es maxt shpas]</div>
               </div>
-              <div class="flip-back">
-                <div class="flip-es">es divertido</div>
-                <div class="flip-hint">clic para volver</div>
-              </div>
+              <div class="flip-back"><div class="flip-es">es divertido</div><div class="flip-hint">clic para volver</div></div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: image gallery -->
+      <div class="film-gallery">
+        <img class="film-img film-img--wide"
+             src="https://img.olympics.com/images/image/private/t_16-9_640/f_auto/v1538355600/primary/n80ce8iamnb4wfaseinc"
+             alt="Volleyball Olympics" loading="lazy">
+        <div class="film-row">
+          <img class="film-img"
+               src="https://concepto.de/wp-content/uploads/2016/04/voleibol-2-e1547769267299.jpg"
+               alt="Voleibol" loading="lazy">
+          <img class="film-img"
+               src="https://ant.culturarecreacionydeporte.gov.co/sites/default/files/voli.jpg"
+               alt="Volleyball Colombia" loading="lazy">
         </div>
       </div>
     </div>
