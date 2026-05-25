@@ -568,6 +568,45 @@
   }
   .intro-es.hidden { opacity: 0; }
 
+  /* FILM GALLERY */
+  .film-gallery {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px 20px 20px 12px;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .film-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    transition: transform .3s, box-shadow .3s;
+  }
+  .film-img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 28px rgba(0,0,0,.35);
+  }
+  .film-img--wide {
+    flex: 1.1;
+    min-height: 0;
+  }
+  .film-row {
+    flex: 1;
+    display: flex;
+    gap: 8px;
+    min-height: 0;
+  }
+  .film-row .film-img { flex: 1; min-width: 0; }
+  .film-img--poster { object-position: top; }
+
+  @media (max-width: 700px) {
+    .film-gallery { display: none; }
+  }
+
   /* SCROLLBAR */
   .slide-inner::-webkit-scrollbar { width: 4px; }
   .slide-inner::-webkit-scrollbar-track { background: transparent; }
@@ -696,30 +735,28 @@
     </div>
 
     <!-- ═══ SLIDE 1: LIEBLINGSFILM ═══ -->
-    <div class="slide content-slide" id="slide-1">
+    <div class="slide content-slide" id="slide-1" style="flex-direction:row;">
       <div class="copper-bar"></div>
-      <div class="slide-inner">
-        <div class="slide-emoji-bg">🎬</div>
+
+      <!-- LEFT: text + vocab -->
+      <div class="slide-inner" style="flex:1.1; min-width:0;">
         <div class="slide-counter">01 / 05</div>
         <div class="slide-category">Lieblingsfilm</div>
         <div class="topic-badge"><span class="emoji">🎬</span> Interstellar</div>
         <div class="slide-main-phrase">Mein Lieblingsfilm ist Interstellar.</div>
-        <div class="slide-desc">Der Film ist sehr spannend und interessant.</div>
-        <div class="slide-translation">"Mi película favorita es Interstellar. La película es muy emocionante e interesante."</div>
+        <div class="slide-desc">Er ist mein Favorit, weil ich Wissenschaft und das Universum mag.</div>
+        <div class="slide-translation">"Mi película favorita es Interstellar. Es mi favorita porque me gusta la ciencia y el universo."</div>
 
         <div class="vocab-label">Vokabeln – klick zum Umdrehen</div>
-        <div class="vocab-grid">
+        <div class="vocab-grid" style="grid-template-columns:repeat(2,1fr);">
           <div class="flip-card" onclick="this.classList.toggle('flipped')">
             <div class="flip-inner">
               <div class="flip-front">
                 <div class="flip-de">Film</div>
                 <div class="flip-article">der Film</div>
-                <div class="flip-phonetic" data-pron="film" onclick="showPron(event,'film')">[film]</div>
+                <div class="flip-phonetic" onclick="showPron(event,'film')">[film]</div>
               </div>
-              <div class="flip-back">
-                <div class="flip-es">película</div>
-                <div class="flip-hint">clic para volver</div>
-              </div>
+              <div class="flip-back"><div class="flip-es">película</div><div class="flip-hint">clic para volver</div></div>
             </div>
           </div>
           <div class="flip-card" onclick="this.classList.toggle('flipped')">
@@ -727,12 +764,9 @@
               <div class="flip-front">
                 <div class="flip-de">spannend</div>
                 <div class="flip-article">adj.</div>
-                <div class="flip-phonetic" data-pron="shpánent" onclick="showPron(event,'shpánent')">[shpánent]</div>
+                <div class="flip-phonetic" onclick="showPron(event,'shpánent')">[shpánent]</div>
               </div>
-              <div class="flip-back">
-                <div class="flip-es">emocionante</div>
-                <div class="flip-hint">clic para volver</div>
-              </div>
+              <div class="flip-back"><div class="flip-es">emocionante</div><div class="flip-hint">clic para volver</div></div>
             </div>
           </div>
           <div class="flip-card" onclick="this.classList.toggle('flipped')">
@@ -740,27 +774,36 @@
               <div class="flip-front">
                 <div class="flip-de">interessant</div>
                 <div class="flip-article">adj.</div>
-                <div class="flip-phonetic" data-pron="interesánt" onclick="showPron(event,'interesánt')">[interesánt]</div>
+                <div class="flip-phonetic" onclick="showPron(event,'interesánt')">[interesánt]</div>
               </div>
-              <div class="flip-back">
-                <div class="flip-es">interesante</div>
-                <div class="flip-hint">clic para volver</div>
-              </div>
+              <div class="flip-back"><div class="flip-es">interesante</div><div class="flip-hint">clic para volver</div></div>
             </div>
           </div>
           <div class="flip-card" onclick="this.classList.toggle('flipped')">
             <div class="flip-inner">
               <div class="flip-front">
-                <div class="flip-de">sehr</div>
-                <div class="flip-article">adv.</div>
-                <div class="flip-phonetic" data-pron="ser" onclick="showPron(event,'ser')">[ser]</div>
+                <div class="flip-de">Universum</div>
+                <div class="flip-article">das Universum</div>
+                <div class="flip-phonetic" onclick="showPron(event,'universum')">[univérsum]</div>
               </div>
-              <div class="flip-back">
-                <div class="flip-es">muy</div>
-                <div class="flip-hint">clic para volver</div>
-              </div>
+              <div class="flip-back"><div class="flip-es">universo</div><div class="flip-hint">clic para volver</div></div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: image gallery -->
+      <div class="film-gallery">
+        <img class="film-img film-img--wide"
+             src="https://framerusercontent.com/images/LaWlbEkrTmKgHyJrmjajVfD3I.jpg?width=967&height=544"
+             alt="Interstellar scene" loading="lazy">
+        <div class="film-row">
+          <img class="film-img"
+               src="https://articles-img.sftcdn.net/t_article_cover_xl/auto-mapping-folder/sites/2/2023/03/interestellar-final-explicado.jpg"
+               alt="Interstellar explicado" loading="lazy">
+          <img class="film-img film-img--poster"
+               src="https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+               alt="Interstellar poster" loading="lazy">
         </div>
       </div>
     </div>
