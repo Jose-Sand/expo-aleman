@@ -603,7 +603,7 @@
   .film-row .film-img { flex: 1; min-width: 0; }
   .film-img--poster { object-position: top; }
 
-  /* DOG GALLERY – 3 main images stacked on the right */
+  /* DOG GALLERY – 3 main images stacked on the right, natural height */
   .dog-gallery-main {
     flex: 1.1;
     display: flex;
@@ -611,11 +611,12 @@
     gap: 6px;
     padding: 14px 16px 14px 8px;
     min-width: 0;
+    overflow-y: auto;
   }
   .dog-img {
-    flex: 1;
     width: 100%;
-    min-height: 0;
+    height: auto;
+    flex-shrink: 0;
     object-fit: contain;
     background: var(--slate);
     border-radius: 8px;
@@ -629,25 +630,26 @@
     position: relative;
   }
 
-  /* 3 small images in left column below vocab */
+  /* 3 small images in left column — fill remaining space below vocab */
   .dog-small-row {
     display: flex;
     gap: 6px;
     margin-top: 14px;
-    height: 80px;
-    flex-shrink: 0;
+    flex: 1;
+    min-height: 100px;
   }
   .dog-small-img {
     flex: 1;
     min-width: 0;
-    height: 100%;
+    min-height: 0;
+    width: 100%;
     object-fit: contain;
     background: var(--slate);
     border-radius: 7px;
     transition: transform .25s, box-shadow .25s;
   }
   .dog-small-img:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
     box-shadow: 0 4px 14px rgba(0,0,0,.25);
     z-index: 1;
     position: relative;
@@ -1011,7 +1013,7 @@
       <div class="copper-bar"></div>
 
       <!-- LEFT: text + vocab -->
-      <div class="slide-inner" style="flex:0.85; min-width:0;">
+      <div class="slide-inner" style="flex:0.85; min-width:0; display:flex; flex-direction:column;">
         <div class="slide-counter">04 / 05</div>
         <div class="slide-category">Lieblingstier</div>
         <div class="topic-badge"><span class="emoji">🐕</span> der Hund</div>
