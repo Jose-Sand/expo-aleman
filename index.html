@@ -603,27 +603,50 @@
   .film-row .film-img { flex: 1; min-width: 0; }
   .film-img--poster { object-position: top; }
 
-  /* DOG GALLERY – 3×2 grid */
-  .dog-gallery {
-    flex: 1.2;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+  /* DOG GALLERY – 3 main images stacked on the right */
+  .dog-gallery-main {
+    flex: 1.1;
+    display: flex;
+    flex-direction: column;
     gap: 6px;
     padding: 14px 16px 14px 8px;
     min-width: 0;
   }
   .dog-img {
+    flex: 1;
     width: 100%;
-    height: 100%;
+    min-height: 0;
     object-fit: cover;
     border-radius: 8px;
     display: block;
     transition: transform .3s, box-shadow .3s;
   }
   .dog-img:hover {
-    transform: scale(1.04);
+    transform: scale(1.02);
     box-shadow: 0 6px 22px rgba(0,0,0,.3);
+    z-index: 1;
+    position: relative;
+  }
+
+  /* 3 small images in left column below vocab */
+  .dog-small-row {
+    display: flex;
+    gap: 6px;
+    margin-top: 14px;
+    height: 80px;
+    flex-shrink: 0;
+  }
+  .dog-small-img {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 7px;
+    transition: transform .25s, box-shadow .25s;
+  }
+  .dog-small-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 14px rgba(0,0,0,.25);
     z-index: 1;
     position: relative;
   }
@@ -1037,16 +1060,20 @@
             </div>
           </div>
         </div>
+
+        <!-- 3 small images below vocab -->
+        <div class="dog-small-row">
+          <img class="dog-small-img" src="perro4.jpeg" alt="Perro 4" loading="lazy">
+          <img class="dog-small-img" src="perro5.jpeg" alt="Perro 5" loading="lazy">
+          <img class="dog-small-img" src="perro6.jpeg" alt="Perro 6" loading="lazy">
+        </div>
       </div>
 
-      <!-- RIGHT: 6-image grid 3x2 -->
-      <div class="dog-gallery">
+      <!-- RIGHT: 3 main images stacked vertically -->
+      <div class="dog-gallery-main">
         <img class="dog-img" src="perro1.jpeg" alt="Perro 1" loading="lazy">
         <img class="dog-img" src="perro2.jpeg" alt="Perro 2" loading="lazy">
         <img class="dog-img" src="perro3.jpeg" alt="Perro 3" loading="lazy">
-        <img class="dog-img" src="perro4.jpeg" alt="Perro 4" loading="lazy">
-        <img class="dog-img" src="perro5.jpeg" alt="Perro 5" loading="lazy">
-        <img class="dog-img" src="perro6.jpeg" alt="Perro 6" loading="lazy">
       </div>
     </div>
 
