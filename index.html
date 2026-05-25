@@ -603,20 +603,22 @@
   .film-row .film-img { flex: 1; min-width: 0; }
   .film-img--poster { object-position: top; }
 
-  /* DOG GALLERY – 3 main images stacked on the right, natural height */
+  /* DOG GALLERY – 3 images side by side, full visible */
   .dog-gallery-main {
     flex: 1.1;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: stretch;
     gap: 6px;
     padding: 14px 16px 14px 8px;
     min-width: 0;
-    overflow-y: auto;
+    overflow: hidden;
   }
   .dog-img {
-    width: 100%;
-    height: auto;
-    flex-shrink: 0;
+    flex: 1;
+    min-width: 0;
+    width: 0;
+    height: 100%;
     object-fit: contain;
     background: var(--slate);
     border-radius: 8px;
@@ -624,7 +626,7 @@
     transition: transform .3s, box-shadow .3s;
   }
   .dog-img:hover {
-    transform: scale(1.02);
+    transform: scale(1.03);
     box-shadow: 0 6px 22px rgba(0,0,0,.3);
     z-index: 1;
     position: relative;
