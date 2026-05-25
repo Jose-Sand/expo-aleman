@@ -1027,10 +1027,11 @@
     </div>
 
     <!-- ═══ SLIDE 5: LIEBLINGSFARBE ═══ -->
-    <div class="slide content-slide" id="slide-5">
+    <div class="slide content-slide" id="slide-5" style="flex-direction:row;">
       <div class="copper-bar"></div>
-      <div class="slide-inner">
-        <div class="slide-emoji-bg">🖤</div>
+
+      <!-- LEFT: text + vocab -->
+      <div class="slide-inner" style="flex:1.1; min-width:0;">
         <div class="slide-counter">05 / 05</div>
         <div class="slide-category">Lieblingsfarbe</div>
         <div class="topic-badge"><span class="emoji">🖤</span> Schwarz</div>
@@ -1039,18 +1040,15 @@
         <div class="slide-translation">"Mi color favorito es el negro. El negro es elegante y moderno. Encuentro el negro muy bonito."</div>
 
         <div class="vocab-label">Vokabeln – klick zum Umdrehen</div>
-        <div class="vocab-grid">
+        <div class="vocab-grid" style="grid-template-columns:repeat(2,1fr);">
           <div class="flip-card" onclick="this.classList.toggle('flipped')">
             <div class="flip-inner">
               <div class="flip-front">
                 <div class="flip-de">Farbe</div>
                 <div class="flip-article">die Farbe</div>
-                <div class="flip-phonetic" data-pron="fárbe" onclick="showPron(event,'fárbe')">[fárbe]</div>
+                <div class="flip-phonetic" onclick="showPron(event,'fárbe')">[fárbe]</div>
               </div>
-              <div class="flip-back">
-                <div class="flip-es">color</div>
-                <div class="flip-hint">clic para volver</div>
-              </div>
+              <div class="flip-back"><div class="flip-es">color</div><div class="flip-hint">clic para volver</div></div>
             </div>
           </div>
           <div class="flip-card" onclick="this.classList.toggle('flipped')">
@@ -1058,12 +1056,9 @@
               <div class="flip-front">
                 <div class="flip-de">schwarz</div>
                 <div class="flip-article">adj.</div>
-                <div class="flip-phonetic" data-pron="shvarts" onclick="showPron(event,'shvarts')">[shvarts]</div>
+                <div class="flip-phonetic" onclick="showPron(event,'shvarts')">[shvarts]</div>
               </div>
-              <div class="flip-back">
-                <div class="flip-es">negro</div>
-                <div class="flip-hint">clic para volver</div>
-              </div>
+              <div class="flip-back"><div class="flip-es">negro</div><div class="flip-hint">clic para volver</div></div>
             </div>
           </div>
           <div class="flip-card" onclick="this.classList.toggle('flipped')">
@@ -1071,12 +1066,9 @@
               <div class="flip-front">
                 <div class="flip-de">elegant</div>
                 <div class="flip-article">adj.</div>
-                <div class="flip-phonetic" data-pron="elegánt" onclick="showPron(event,'elegánt')">[elegánt]</div>
+                <div class="flip-phonetic" onclick="showPron(event,'elegánt')">[elegánt]</div>
               </div>
-              <div class="flip-back">
-                <div class="flip-es">elegante</div>
-                <div class="flip-hint">clic para volver</div>
-              </div>
+              <div class="flip-back"><div class="flip-es">elegante</div><div class="flip-hint">clic para volver</div></div>
             </div>
           </div>
           <div class="flip-card" onclick="this.classList.toggle('flipped')">
@@ -1084,14 +1076,26 @@
               <div class="flip-front">
                 <div class="flip-de">Ich finde…schön</div>
                 <div class="flip-article">frase</div>
-                <div class="flip-phonetic" data-pron="ij fínde…shön" onclick="showPron(event,'ij fínde…shön')">[ij fínde…shön]</div>
+                <div class="flip-phonetic" onclick="showPron(event,'ij fínde…shön')">[ij fínde…shön]</div>
               </div>
-              <div class="flip-back">
-                <div class="flip-es">encuentro…bonito</div>
-                <div class="flip-hint">clic para volver</div>
-              </div>
+              <div class="flip-back"><div class="flip-es">encuentro…bonito</div><div class="flip-hint">clic para volver</div></div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: image gallery -->
+      <div class="film-gallery">
+        <img class="film-img film-img--wide"
+             src="https://www.elcarrocolombiano.com/wp-content/uploads/2020/03/20202003-BMW-SERIE-2-BLACK-EDITION-AA-01-750x517.jpg"
+             alt="BMW negro elegante" loading="lazy">
+        <div class="film-row">
+          <img class="film-img"
+               src="https://dr-beckmannlatam.com/wp-content/uploads/2024/04/tobias-van-schneider-gCeCpP15V1o-unsplash-psicologia-del-color-negro.jpg"
+               alt="Psicología del negro" loading="lazy">
+          <img class="film-img"
+               src="https://decofilia.com/wp-content/uploads/2015/12/psicologia-color-negro-01.jpg"
+               alt="Color negro elegancia" loading="lazy">
         </div>
       </div>
     </div>
